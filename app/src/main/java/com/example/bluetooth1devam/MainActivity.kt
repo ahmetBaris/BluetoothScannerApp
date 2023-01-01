@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         //konum izni için çağrılan sınıf
         //konum sınıfımız yazmamızın sebebi android 11de konumsuz bluetooth tarama(scan) işlemi yapmıyor
-        if (android.os.Build.VERSION.SDK_INT==11){
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.R){
             GPSUtils(this).turnOnGPS()
         }
 
@@ -72,16 +72,22 @@ class MainActivity : AppCompatActivity() {
 
         // android 12 ve 13 için nearby devices izni
         // bu kısım olmazsa app anında çöküyor.
-
-        if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_DENIED)
-        {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-            {
-                ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.BLUETOOTH_CONNECT), 2)
-                return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(
+                    this@MainActivity,
+                    Manifest.permission.BLUETOOTH_CONNECT
+                ) == PackageManager.PERMISSION_DENIED
+            ) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    ActivityCompat.requestPermissions(
+                        this@MainActivity,
+                        arrayOf(Manifest.permission.BLUETOOTH_CONNECT),
+                        2
+                    )
+                    return
+                }
             }
         }
-
 
 
 
