@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">bluetooth1devam</string>
+
+    <string name="on_off">ON/OFF</string>
+    <string name="enable_discoverability">Enable Discoverability</string>
+    <string name="get_paired_devices">Get Paired Devices</string>
+</resources>
